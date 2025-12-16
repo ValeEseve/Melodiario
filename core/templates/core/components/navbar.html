@@ -1,54 +1,28 @@
-<nav class="bg-neutral-800 fixed w-full z-20 top-0 left-0 border-b border-zinc-700">
-    <div class="max-w-screen-xl mx-auto px-4 flex flex-wrap items-center justify-between h-16">
-        <a href="{% url 'core:home' %}" class="flex items-center space-x-3 h-16">
-            <!-- <img src="" class="h-7" alt="Melodiario Logo" /> -->
-            <span class="text-xl font-semibold text-white">Melodiario</span>
-        </a>
-
-        <!-- Botón hamburguesa móvil -->
-        <button id="navbar-toggle" type="button"
-            class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-white rounded-md md:hidden hover:bg-zinc-700 focus:outline-none focus:ring-2 focus:ring-zinc-500">
-            <span class="sr-only">Abrir menú</span>
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M4 6h16M4 12h16M4 18h16"></path>
-            </svg>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="{% url 'core:home' %}">Melodiario</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
         </button>
-
-        <!-- Menú -->
-        <div id="navbar-default"
-            class="hidden w-full flex-col md:flex md:flex-row md:items-center md:w-auto mt-2 md:mt-0 bg-neutral-800 md:bg-transparent transition-all duration-300 ease-in-out">
-            <ul class="flex flex-col md:flex-row md:space-x-6 font-medium">
-                <li>
-                    <a href="{% url 'core:home' %}"
-                        class="block py-2 px-3 text-white rounded md:p-0 md:hover:text-indigo-400">Home</a>
-                </li>
-
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
                 {% if user.is_authenticated %}
-                    <li>
-                        <a href="{% url 'users:profile' %}"
-                            class="block py-2 px-3 text-white rounded md:p-0 md:hover:text-indigo-400">Perfil</a>
-                    </li>
-                    <li>
-                        <a href="{% url 'users:logout' %}"
-                            class="block py-2 px-3 text-white rounded md:p-0 md:hover:text-indigo-400">Cerrar sesión</a>
-                    </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'users:dashboard' %}">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'users:logout' %}">Cerrar Sesión</a>
+                </li>
                 {% else %}
-                    <li>
-                        <a href="{% url 'users:login' %}"
-                            class="block py-2 px-3 text-white rounded md:p-0 md:hover:text-indigo-400">Login</a>
-                    </li>
-                    <li>
-                        <a href="{% url 'users:register' %}"
-                            class="block py-2 px-3 text-white rounded md:p-0 md:hover:text-indigo-400">Registrarse</a>
-                    </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'users:login' %}">Iniciar Sesión</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'users:register' %}">Registrarse</a>
+                </li>
                 {% endif %}
             </ul>
         </div>
     </div>
 </nav>
-
-<div class="pt-16 md:pt-16"></div>
-
-

@@ -1,7 +1,13 @@
 {% extends 'core/base.html' %}
+{% block title %}Inicio{% endblock %}
 
 {% block content %}
-<h1>Descubre</h1>
-
-<h1>Feed</h1>
+<div class="container py-5">
+    <div class="text-center text-light">
+        <h1 class="mb-4">Bienvenido a Melodiario!</h1>
+        <p class="lead">Registra tus pensamientos de tus discos y canciones favoritos!</p>
+        <a href="{% url 'entries:entry_list' %}" class="btn btn-primary btn-lg mt-3">Ver Entradas</a>
+        <a href="{% url 'music:album_list' %}" class="btn btn-secondary btn-lg mt-3">Explorar Álbumes</a>
+    </div>
+</div>
 {% endblock %}
