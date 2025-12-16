@@ -16,17 +16,16 @@ def album_detail(request, pk):
     album = get_object_or_404(Album, pk=pk)
     return render(request, 'music/album_detail.html', {'album': album})
 
-@login_required
-@staff_required
+
 def album_create(request):
     if request.method == 'POST':
         form = AlbumForm(request.POST)
         if form.is_valid():
-            album = form.save()
-            messages.success(request, "Álbum creado exitosamente.")
+            album = form.save()  
             return redirect('music:album_detail', pk=album.pk)
     else:
         form = AlbumForm()
+    
     return render(request, 'music/album_form.html', {'form': form})
 
 @login_required
@@ -108,18 +107,17 @@ def song_detail(request, pk):
     song = get_object_or_404(Song, pk=pk)
     return render(request, 'music/song_detail.html', {'song': song})
 
-@login_required
-@staff_required
 def song_create(request):
     if request.method == 'POST':
         form = SongForm(request.POST)
         if form.is_valid():
-            song = form.save()
-            messages.success(request, "Canción creada exitosamente.")
+            song = form.save()  
             return redirect('music:song_detail', pk=song.pk)
     else:
         form = SongForm()
+    
     return render(request, 'music/song_form.html', {'form': form})
+
 
 @login_required
 @staff_required

@@ -17,10 +17,9 @@ class AlbumForm(forms.ModelForm):
         fields = ['title', 'artists', 'genres', 'release_date', 'musicbrainz_id']
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control'}),
-            'artists': forms.SelectMultiple(attrs={'class': 'form-select'}),
-            'genres': forms.SelectMultiple(attrs={'class': 'form-select'}),
             'release_date': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
-            'musicbrainz_id': forms.TextInput(attrs={'class': 'form-control'}),
+            'artists': forms.SelectMultiple(attrs={'class': 'form-control'}),
+            'genres': forms.SelectMultiple(attrs={'class': 'form-control'}),
         }
 
 class SongForm(forms.ModelForm):
@@ -29,8 +28,7 @@ class SongForm(forms.ModelForm):
         fields = ['title', 'album', 'musicbrainz_id']
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control'}),
-            'album': forms.Select(attrs={'class': 'form-select'}),
-            'musicbrainz_id': forms.TextInput(attrs={'class': 'form-control'}),
+            'album': forms.Select(attrs={'class': 'form-control'}),
         }
 
 class GenreForm(forms.ModelForm):
