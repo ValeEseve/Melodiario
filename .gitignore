@@ -1,0 +1,7 @@
+.env
+venv/
+config/__pycache__
+core/__pycache__
+entries/__pycache__
+music/__pycache__
+users/__pycache__
