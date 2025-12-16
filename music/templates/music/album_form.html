@@ -1,11 +1,18 @@
 {% extends 'base.html' %}
-{% block title %}{% if form.instance.pk %}Editar Álbum{% else %}Nuevo Álbum{% endif %}{% endblock %}
+{% block title %}Nuevo Álbum{% endblock %}
 
 {% block content %}
-<h1 class="mb-3">{% if form.instance.pk %}Editar Álbum{% else %}Nuevo Álbum{% endif %}</h1>
+<h1 class="mb-3">Nuevo Álbum</h1>
 
-<form method="post" class="bg-secondary p-4 rounded">
+<form method="post" class="bg-secondary p-4 rounded" id="album-form">
     {% csrf_token %}
+    <div class="mb-3">
+        <label for="album-search" class="form-label">Buscar álbum en MusicBrainz</label>
+        <input type="text" id="album-search" class="form-control" placeholder="Escribe el nombre del álbum...">
+        <small class="text-muted">Selecciona uno de los resultados para autocompletar.</small>
+        <ul id="search-results" class="list-group mt-2"></ul>
+    </div>
+
     {% for field in form %}
         <div class="mb-3">
             {{ field.label_tag }}
@@ -15,7 +22,10 @@
             {% endif %}
         </div>
     {% endfor %}
+
     <button type="submit" class="btn btn-primary">Guardar</button>
     <a href="{% url 'music:album_list' %}" class="btn btn-secondary">Cancelar</a>
 </form>
+
+<script source="{% static 'js/script.js' %}"></script>
 {% endblock %}
