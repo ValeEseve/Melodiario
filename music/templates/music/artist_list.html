@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}Artistas{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h1>Artistas</h1>
+    {% if user.is_staff %}
+        <a href="{% url 'music:artist_create' %}" class="btn btn-primary">Nuevo Artista</a>
+    {% endif %}
+</div>
+
+{% if artists %}
+    <div class="list-group">
+        {% for artist in artists %}
+            <a href="{% url 'music:artist_detail' artist.pk %}" class="list-group-item list-group-item-action bg-secondary text-light mb-2 rounded">
+                <h5>{{ artist.name }}</h5>
+            </a>
+        {% endfor %}
+    </div>
+{% else %}
+    <p>No hay artistas registrados.</p>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}Álbumes{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h1>Álbumes</h1>
+    {% if user.is_staff %}
+        <a href="{% url 'music:album_create' %}" class="btn btn-primary">Nuevo Álbum</a>
+    {% endif %}
+</div>
+
+{% if albums %}
+    <div class="list-group">
+        {% for album in albums %}
+            <a href="{% url 'music:album_detail' album.pk %}" class="list-group-item list-group-item-action bg-secondary text-light mb-2 rounded">
+                <h5 class="mb-1">{{ album.title }}</h5>
+                <small>Artistas: {% for artist in album.artists.all %}{{ artist.name }}{% if not forloop.last %}, {% endif %}{% endfor %}</small>
+            </a>
+        {% endfor %}
+    </div>
+{% else %}
+    <p>No hay álbumes registrados.</p>
+{% endif %}
+{% endblock %}

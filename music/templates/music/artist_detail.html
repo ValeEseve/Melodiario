@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}{{ artist.name }}{% endblock %}
+
+{% block content %}
+<div class="mb-3">
+    <h1>{{ artist.name }}</h1>
+    {% if artist.bio %}
+        <p>{{ artist.bio }}</p>
+    {% endif %}
+
+    {% if user.is_staff %}
+        <a href="{% url 'music:artist_update' artist.pk %}" class="btn btn-warning me-2">Editar</a>
+        <a href="{% url 'music:artist_delete' artist.pk %}" class="btn btn-danger">Eliminar</a>
+    {% endif %}
+</div>
+
+<a href="{% url 'music:artist_list' %}" class="btn btn-secondary">Volver a Artistas</a>
+{% endblock %}

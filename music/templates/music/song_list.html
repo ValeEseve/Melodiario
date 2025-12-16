@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}Canciones{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h1>Canciones</h1>
+    {% if user.is_staff %}
+        <a href="{% url 'music:song_create' %}" class="btn btn-primary">Nueva Canción</a>
+    {% endif %}
+</div>
+
+{% if songs %}
+    <div class="list-group">
+        {% for song in songs %}
+            <a href="{% url 'music:song_detail' song.pk %}" class="list-group-item list-group-item-action bg-secondary text-light mb-2 rounded">
+                <h5>{{ song.title }}</h5>
+                <small>Álbum: {{ song.album.title }}</small>
+            </a>
+        {% endfor %}
+    </div>
+{% else %}
+    <p>No hay canciones registradas.</p>
+{% endif %}
+{% endblock %}

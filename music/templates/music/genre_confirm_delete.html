@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %}Eliminar Género{% endblock %}
+
+{% block content %}
+<h1 class="mb-3">Eliminar Género</h1>
+<p>¿Seguro que quieres eliminar "{{ genre.name }}"?</p>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Eliminar</button>
+    <a href="{% url 'music:genre_detail' genre.pk %}" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}

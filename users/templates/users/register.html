@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}Registrarse{% endblock %}
+
+{% block content %}
+<h1 class="mb-3">Registrarse</h1>
+
+<form method="post" class="bg-secondary p-4 rounded" novalidate>
+    {% csrf_token %}
+    {% for field in form %}
+        <div class="mb-3">
+            {{ field.label_tag }}
+            {{ field }}
+            {% if field.errors %}
+                <div class="text-danger small">{{ field.errors }}</div>
+            {% endif %}
+        </div>
+    {% endfor %}
+    <button type="submit" class="btn btn-primary">Registrar</button>
+    <a href="{% url 'users:login' %}" class="btn btn-secondary">Iniciar Sesión</a>
+</form>
+{% endblock %}

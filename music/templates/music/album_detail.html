@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}{{ album.title }}{% endblock %}
+
+{% block content %}
+<div class="mb-3">
+    <h1>{{ album.title }}</h1>
+    <p class="text-muted">Artistas: {% for artist in album.artists.all %}{{ artist.name }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
+    <p class="text-muted">Géneros: {% for genre in album.genres.all %}{{ genre.name }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
+    <p class="text-muted">Fecha de lanzamiento: {{ album.release_date }}</p>
+
+    {% if user.is_staff %}
+        <a href="{% url 'music:album_update' album.pk %}" class="btn btn-warning me-2">Editar</a>
+        <a href="{% url 'music:album_delete' album.pk %}" class="btn btn-danger">Eliminar</a>
+    {% endif %}
+</div>
+
+<a href="{% url 'music:album_list' %}" class="btn btn-secondary">Volver a Álbumes</a>
+{% endblock %}

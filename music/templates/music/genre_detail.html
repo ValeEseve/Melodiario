@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}{{ genre.name }}{% endblock %}
+
+{% block content %}
+<div class="mb-3">
+    <h1>{{ genre.name }}</h1>
+
+    {% if genre.albums.all %}
+        <p>Álbumes relacionados:</p>
+        <ul class="list-group mb-3">
+            {% for album in genre.albums.all %}
+                <li class="list-group-item bg-secondary text-light rounded mb-1">
+                    <a href="{% url 'music:album_detail' album.pk %}" class="text-light">{{ album.title }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    {% if user.is_staff %}
+        <a href="{% url 'music:genre_update' genre.pk %}" class="btn btn-warning me-2">Editar</a>
+        <a href="{% url 'music:genre_delete' genre.pk %}" class="btn btn-danger">Eliminar</a>
+    {% endif %}
+</div>
+
+<a href="{% url 'music:genre_list' %}" class="btn btn-secondary">Volver a Géneros</a>
+{% endblock %}

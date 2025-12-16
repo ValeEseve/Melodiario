@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}Géneros{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h1>Géneros</h1>
+    {% if user.is_staff %}
+        <a href="{% url 'music:genre_create' %}" class="btn btn-primary">Nuevo Género</a>
+    {% endif %}
+</div>
+
+{% if genres %}
+    <div class="list-group">
+        {% for genre in genres %}
+            <a href="{% url 'music:genre_detail' genre.pk %}" class="list-group-item list-group-item-action bg-secondary text-light mb-2 rounded">
+                <h5>{{ genre.name }}</h5>
+            </a>
+        {% endfor %}
+    </div>
+{% else %}
+    <p>No hay géneros registrados.</p>
+{% endif %}
+{% endblock %}

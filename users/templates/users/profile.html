@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}Perfil de {{ username }}{% endblock %}
+
+{% block content %}
+<h1 class="mb-3">Perfil de {{ username }}</h1>
+
+<div class="bg-secondary p-4 rounded mb-3">
+    <p><strong>Instagram:</strong> {% if user.instagram %}<a href="{{ user.instagram }}" target="_blank">{{ user.instagram }}</a>{% else %}No registrado{% endif %}</p>
+    <p><strong>Spotify:</strong> {% if user.spotify %}<a href="{{ user.spotify }}" target="_blank">{{ user.spotify }}</a>{% else %}No registrado{% endif %}</p>
+    <p><strong>Biografía:</strong> {{ user.bio|default:"No hay biografía" }}</p>
+    <p><strong>Géneros favoritos:</strong> 
+        {% if user.favorite_genres.all %}
+            {% for genre in user.favorite_genres.all %}{{ genre.name }}{% if not forloop.last %}, {% endif %}{% endfor %}
+        {% else %}
+            No hay géneros favoritos
+        {% endif %}
+    </p>
+</div>
+
+<a href="{% url 'users:dashboard' %}" class="btn btn-secondary">Volver al Dashboard</a>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}{{ song.title }}{% endblock %}
+
+{% block content %}
+<div class="mb-3">
+    <h1>{{ song.title }}</h1>
+    <p class="text-muted">Álbum: <a href="{% url 'music:album_detail' song.album.pk %}">{{ song.album.title }}</a></p>
+    <p class="text-muted">Artistas: {% for artist in song.album.artists.all %}{{ artist.name }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
+    {% if user.is_staff %}
+        <a href="{% url 'music:song_update' song.pk %}" class="btn btn-warning me-2">Editar</a>
+        <a href="{% url 'music:song_delete' song.pk %}" class="btn btn-danger">Eliminar</a>
+    {% endif %}
+</div>
+
+<a href="{% url 'music:song_list' %}" class="btn btn-secondary">Volver a Canciones</a>
+{% endblock %}
