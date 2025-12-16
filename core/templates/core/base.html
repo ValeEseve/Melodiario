@@ -4,9 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {% block title %}<title>Melodiario</title>{% endblock %}
+    <title>{% block title %}Melodiario{% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
 </head>
-<body>
+<body class="bg-black text-zinc-400">
     {include 'core/components/navbar.html'}
     {% block content %}
     {% endblock %}
