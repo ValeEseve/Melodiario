@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, logout as auth_logout
+from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .forms import RegistrationForm, UserForm
@@ -20,8 +21,24 @@ def register(request):
     return render(request, 'users/register.html', {'form': form})
 
 def login_view(request):
-    # Aquí se puede usar Django auth views o crear login manual
-    return render(request, 'users/login.html')
+    if request.method == 'POST':
+        form = AuthenticationForm(request, data=request.POST)
+        for field in form.fields.values():
+            field.widget.attrs.update({'class': 'form-control'})
+
+        if form.is_valid():
+            user = form.get_user()
+            login(request, user)
+            messages.success(request, "Has iniciado sesión correctamente.")
+            return redirect('users:dashboard')
+        else:
+            messages.error(request, "Usuario o contraseña incorrectos. Por favor, inténtalo de nuevo.")
+    else:
+        form = AuthenticationForm()
+        for field in form.fields.values():
+            field.widget.attrs.update({'class': 'form-control'})
+
+    return render(request, 'users/login.html', {'form': form})
 
 @login_required
 def logout_view(request):
